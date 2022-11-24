@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import ToyForm from "./ToyForm";
 import ToyContainer from "./ToyContainer";
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
-  const [toys, setToys] = useState([]);
+const[showForm,setShowForm] = useState(false)
+const[toys,setToys] = useState([])
 
-  useEffect(() => {
-    fetch("/toys")
-      .then((r) => r.json())
-      .then(setToys);
-  }, []);
+useEffect(() => {
+  fetch('/toys')
+  .then((res)=> res.json())
+  .then(setToys);
+},[]);
 
   function handleClick() {
     setShowForm((showForm) => !showForm);

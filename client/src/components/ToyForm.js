@@ -12,35 +12,27 @@ function ToyForm({ onAddToy }) {
       [event.target.name]: event.target.value,
     });
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const newToy = {
-      ...formData,
-      likes: 0,
-    };
-
-    fetch("/toys", {
+  function handleSubmit(e) {
+    const newToy = {...formData, likes: 0};
+    fetch('/toys', {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type":"application/json",
       },
       body: JSON.stringify(newToy),
-    })
-      .then((r) => r.json())
-      .then((newToy) => {
-        setFormData({
-          name: "",
-          image: "",
-        });
-        onAddToy(newToy);
+      
+    }).then((res)=> res.json())
+    .then((newToy)=> {
+      setFormData({
+        name:"",
+        image:""
       });
+      onAddToy(newToy)
+    })
   }
-
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} className="add-toy-form">
+      <form className="add-toy-form" onSubmit={handleSubmit}>
         <h3>Create a toy!</h3>
         <input
           type="text"
